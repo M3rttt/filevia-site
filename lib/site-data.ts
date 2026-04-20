@@ -188,4 +188,4 @@ export const toolHighlights = [
     title: "Tool flows that feel live now",
     description: "Every page behaves like a usable workflow so Filevia feels like a product, not a teaser."
   }
-];.
+];
