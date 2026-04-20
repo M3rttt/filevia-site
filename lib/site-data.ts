@@ -1,20 +1,10 @@
-import {
-  ArrowLeftRight,
-  FileArchive,
-  FileImage,
-  FileOutput,
-  FilePlus2,
-  FileText,
-  ScanSearch,
-  Scissors,
-  ShieldCheck,
-  Smartphone,
-  WifiOff,
-  Zap
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
-
 export const appDownloadHref = "/#android-app";
+
+export type ToolIconName = "merge" | "split" | "compress" | "pdfToWord" | "wordToPdf" | "imageToPdf";
+
+export type FeatureIconName = "uploadOff" | "privacy" | "offline" | "fast";
+
+export type HighlightIconName = "workflow" | "preview";
 
 export type ToolDefinition = {
   slug: string;
@@ -22,7 +12,7 @@ export type ToolDefinition = {
   shortTitle: string;
   description: string;
   actionLabel: string;
-  icon: LucideIcon;
+  iconName: ToolIconName;
   accepts: string;
   output: string;
   accent: string;
@@ -36,7 +26,7 @@ export const toolDefinitions: ToolDefinition[] = [
     shortTitle: "Merge",
     description: "Combine multiple PDFs into one clean file without sending documents to a remote server.",
     actionLabel: "Merge files",
-    icon: FilePlus2,
+    iconName: "merge",
     accepts: ".pdf",
     output: "Single merged PDF",
     accent: "from-[#6EE7C8]/18 via-[#112437] to-[#6EE7C8]/6",
@@ -48,7 +38,7 @@ export const toolDefinitions: ToolDefinition[] = [
     shortTitle: "Split",
     description: "Pull specific pages into a lighter document for sharing, signing, or archiving.",
     actionLabel: "Split document",
-    icon: Scissors,
+    iconName: "split",
     accepts: ".pdf",
     output: "Selected page range PDF",
     accent: "from-[#FFB86B]/16 via-[#112437] to-[#FFB86B]/6",
@@ -60,7 +50,7 @@ export const toolDefinitions: ToolDefinition[] = [
     shortTitle: "Compress",
     description: "Reduce file size for faster sharing while keeping the document readable on-device.",
     actionLabel: "Compress file",
-    icon: FileArchive,
+    iconName: "compress",
     accepts: ".pdf",
     output: "Compressed PDF",
     accent: "from-[#8FBCFF]/16 via-[#112437] to-[#6EE7C8]/6",
@@ -72,7 +62,7 @@ export const toolDefinitions: ToolDefinition[] = [
     shortTitle: "PDF to Word",
     description: "Convert PDFs into editable Word drafts with a workflow designed for quick mobile edits.",
     actionLabel: "Convert to Word",
-    icon: FileText,
+    iconName: "pdfToWord",
     accepts: ".pdf",
     output: ".docx file",
     accent: "from-[#8FBCFF]/18 via-[#0E1F31] to-[#FFB86B]/6",
@@ -84,7 +74,7 @@ export const toolDefinitions: ToolDefinition[] = [
     shortTitle: "Word to PDF",
     description: "Turn DOCX files into polished PDFs before sending contracts, resumes, or invoices.",
     actionLabel: "Convert to PDF",
-    icon: FileOutput,
+    iconName: "wordToPdf",
     accepts: ".doc,.docx",
     output: "PDF file",
     accent: "from-[#6EE7C8]/14 via-[#0E1F31] to-[#8FBCFF]/8",
@@ -96,7 +86,7 @@ export const toolDefinitions: ToolDefinition[] = [
     shortTitle: "Image to PDF",
     description: "Bundle photos, scans, and screenshots into one PDF for documents that start in your camera roll.",
     actionLabel: "Create PDF",
-    icon: FileImage,
+    iconName: "imageToPdf",
     accepts: ".png,.jpg,.jpeg,.webp",
     output: "Image-based PDF",
     accent: "from-[#FFB86B]/14 via-[#0E1F31] to-[#8FBCFF]/8",
@@ -104,26 +94,26 @@ export const toolDefinitions: ToolDefinition[] = [
   }
 ];
 
-export const toolMap = Object.fromEntries(toolDefinitions.map((tool) => [tool.slug, tool]));
+export const toolMap = Object.fromEntries(toolDefinitions.map((tool) => [tool.slug, tool])) as Record<string, ToolDefinition>;
 
 export const differentiationPoints = [
   {
-    icon: WifiOff,
+    iconName: "uploadOff" as const,
     title: "No upload step",
     description: "Your files stay on your device instead of bouncing through a browser tab and a server queue."
   },
   {
-    icon: ShieldCheck,
+    iconName: "privacy" as const,
     title: "Privacy-first by default",
     description: "Sensitive contracts, IDs, and invoices never need a cloud handoff just to be compressed or merged."
   },
   {
-    icon: Smartphone,
+    iconName: "offline" as const,
     title: "Offline mobile workflow",
     description: "Built for Android use in the real world, including bad connections, travel, and quick one-hand edits."
   },
   {
-    icon: Zap,
+    iconName: "fast" as const,
     title: "Fast without subscriptions",
     description: "No login wall, no recurring paywall, and no waiting on a desktop-style tool chain."
   }
@@ -189,12 +179,12 @@ export const heroToolLabels = ["Merge", "Compress", "PDF to Word", "Word to PDF"
 
 export const toolHighlights = [
   {
-    icon: ArrowLeftRight,
+    iconName: "workflow" as const,
     title: "Real web experience, mobile-first DNA",
     description: "Explore the product on the web, then finish the heavy lifting in the Android app where files stay private."
   },
   {
-    icon: ScanSearch,
+    iconName: "preview" as const,
     title: "Tool flows that feel live now",
     description: "Every page behaves like a usable workflow so Filevia feels like a product, not a teaser."
   }
