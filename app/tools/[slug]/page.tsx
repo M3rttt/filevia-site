@@ -54,15 +54,7 @@ export default function ToolPage({ params }: ToolPageProps) {
         description={tool.description}
         actions={
           <>
-            <Link href="/tools" className="secondary-button">
-              Explore Tools
-            </Link>
-            <Link href="/pricing" className="secondary-button">
-              Pricing
-            </Link>
-          </>
-        }
-      />
+            
 
       <section className="site-shell pb-16">
         <ToolWorkspace tool={tool} />
