@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowLeftRight, ScanSearch } from "lucide-react";
 
 import { Footer } from "@/components/sections/footer";
 import { Header } from "@/components/sections/header";
@@ -14,6 +15,11 @@ export const metadata: Metadata = {
 };
 
 export default function ToolsPage() {
+  const iconMap = {
+    workflow: ArrowLeftRight,
+    preview: ScanSearch
+  };
+
   return (
     <main className="relative overflow-hidden">
       <SiteBackground />
@@ -36,15 +42,19 @@ export default function ToolsPage() {
 
       <section className="site-shell pb-6">
         <div className="grid gap-4 md:grid-cols-2">
-          {toolHighlights.map(({ icon: Icon, title, description }) => (
-            <article key={title} className="glass-panel p-6">
-              <div className="inline-flex rounded-2xl bg-white/5 p-3 text-accent">
-                <Icon className="h-5 w-5" />
-              </div>
-              <h2 className="mt-5 text-2xl font-semibold text-white">{title}</h2>
-              <p className="mt-3 text-sm leading-7 text-muted">{description}</p>
-            </article>
-          ))}
+          {toolHighlights.map(({ iconName, title, description }) => {
+            const Icon = iconMap[iconName];
+
+            return (
+              <article key={title} className="glass-panel p-6">
+                <div className="inline-flex rounded-2xl bg-white/5 p-3 text-accent">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h2 className="mt-5 text-2xl font-semibold text-white">{title}</h2>
+                <p className="mt-3 text-sm leading-7 text-muted">{description}</p>
+              </article>
+            );
+          })}
         </div>
       </section>
 
