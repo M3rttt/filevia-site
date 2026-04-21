@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useRef, useState } from "react";
-import { CheckCircle2, File, LoaderCircle, UploadCloud, X } from "lucide-react";
+import { CheckCircle2, File, FileArchive, FileImage, FileOutput, FilePlus2, FileText, LoaderCircle, Scissors, UploadCloud, X } from "lucide-react";
 
 import type { ToolDefinition } from "@/lib/site-data";
 
@@ -12,6 +12,15 @@ type ToolWorkspaceProps = {
 type Status = "idle" | "processing" | "done";
 
 export function ToolWorkspace({ tool }: ToolWorkspaceProps) {
+  const iconMap = {
+    merge: FilePlus2,
+    split: Scissors,
+    compress: FileArchive,
+    pdfToWord: FileText,
+    wordToPdf: FileOutput,
+    imageToPdf: FileImage
+  };
+  const Icon = iconMap[tool.iconName];
   const inputRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<File[]>([]);
   const [isDragging, setIsDragging] = useState(false);
@@ -62,7 +71,7 @@ export function ToolWorkspace({ tool }: ToolWorkspaceProps) {
             </p>
           </div>
           <div className={`rounded-2xl bg-gradient-to-br ${tool.accent} p-3 text-white`}>
-            <tool.icon className="h-5 w-5" />
+            <Icon className="h-5 w-5" />
           </div>
         </div>
 
