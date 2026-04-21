@@ -1,21 +1,32 @@
-import { Check, Minus } from "lucide-react";
+import { Check, Minus, ShieldCheck, Smartphone, WifiOff, Zap } from "lucide-react";
 
 import { SectionHeading } from "@/components/ui/section-heading";
 import { comparisonRows, differentiationPoints } from "@/lib/site-data";
 
 export function DifferenceSection() {
+  const iconMap = {
+    uploadOff: WifiOff,
+    privacy: ShieldCheck,
+    offline: Smartphone,
+    fast: Zap
+  };
+
   return (
     <section id="difference" className="site-shell py-16 sm:py-20">
       <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-        {differentiationPoints.map(({ icon: Icon, title, description }) => (
-          <article key={title} className="glass-panel p-6">
-            <div className="inline-flex rounded-2xl bg-white/5 p-3 text-accent">
-              <Icon className="h-5 w-5" />
-            </div>
-            <h3 className="mt-5 text-xl font-semibold text-white">{title}</h3>
-            <p className="mt-3 text-sm leading-7 text-muted">{description}</p>
-          </article>
-        ))}
+        {differentiationPoints.map(({ iconName, title, description }) => {
+          const Icon = iconMap[iconName];
+
+          return (
+            <article key={title} className="glass-panel p-6">
+              <div className="inline-flex rounded-2xl bg-white/5 p-3 text-accent">
+                <Icon className="h-5 w-5" />
+              </div>
+              <h3 className="mt-5 text-xl font-semibold text-white">{title}</h3>
+              <p className="mt-3 text-sm leading-7 text-muted">{description}</p>
+            </article>
+          );
+        })}
       </div>
       <div className="mt-12 grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
         <SectionHeading
